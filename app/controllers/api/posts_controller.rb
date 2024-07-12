@@ -1,12 +1,12 @@
 class Api::PostsController < ApplicationController
+  include Pagy::Backend
   before_action :set_post, only: %i[ show update destroy ]
   before_action :unauthenticate_user
   before_action :current_user
 
   # GET /posts
   def index
-    @posts = Post.all
-
+    @posts = Post.paginate(:page => params[:page], :per_page => 2)
     render json: @posts
   end
 

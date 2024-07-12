@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   }
 
   namespace :api do
-    resources :users
+    resources :users, only: [:index]
     resources :posts
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

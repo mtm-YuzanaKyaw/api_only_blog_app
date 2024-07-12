@@ -75,11 +75,14 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    api-pagination (5.0.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
+    bootstrap-will_paginate (1.0.0)
+      will_paginate
     builder (3.3.0)
     concurrent-ruby (1.3.3)
     connection_pool (2.4.1)
@@ -147,6 +150,7 @@ GEM
     nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (8.6.3)
     psych (5.1.2)
       stringio
     puma (6.4.2)
@@ -219,6 +223,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (4.0.1)
     zeitwerk (2.6.16)
 
 PLATFORMS
@@ -226,16 +231,20 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  api-pagination
   bootsnap
+  bootstrap-will_paginate
   debug
   devise
   devise-jwt
   jsonapi-serializer
+  pagy (~> 8.6)
   puma (>= 5.0)
   rack-cors
   rails (~> 7.1.3, >= 7.1.3.4)
   sqlite3 (~> 1.4)
   tzinfo-data
+  will_paginate
 
 RUBY VERSION
    ruby 3.3.3p89

@@ -1,8 +1,8 @@
 class Api::PostsController < ApplicationController
-  include Pagy::Backend
+
   before_action :set_post, only: %i[ show update destroy ]
-  before_action :unauthenticate_user
-  before_action :current_user
+  before_action :authenticate_user
+
 
   # GET /posts
   def index

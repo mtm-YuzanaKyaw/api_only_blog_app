@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def unauthenticate_user
+  def authenticate_user
     unless request.headers['Authorization'].present?
 
       render json: {

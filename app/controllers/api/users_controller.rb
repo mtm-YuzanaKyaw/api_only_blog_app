@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update , :destroy]
   before_action :unauthenticate_user
-
+  before_action :current_user
 
   def index
     @users = User.all
@@ -23,19 +23,42 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      render json: @user
+    if current_user.id == params[:id].to_i
+      if @user.update(user_params)
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: {
+        message: "You don't have permission to modify this route",
+
+      }
     end
   end
 
   def destroy
-    @user.destroy
-    head :no_content
+    if current_user.id == params[:id]
+      @user.destroy
+      head :no_content
+    else
+      render json: {
+        message: "You don't have permission to modify this route"
+      }
+    end
   end
 
+  def current_user
+    if request.headers['Authorization'].present?
+      jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
+                              "123456789").first
 
+      current_user = User.find(jwt_payload['sub'])
+
+      # render json: {jwt_payload: jwt_payload, id: params[:id]}
+
+    end
+  end
 
 
   private

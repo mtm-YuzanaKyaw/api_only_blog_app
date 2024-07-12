@@ -10,6 +10,19 @@ class ApplicationController < ActionController::API
 
     end
   end
+
+  def current_user
+    if request.headers['Authorization'].present?
+      jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
+                              "123456789").first
+
+      current_user = User.find(jwt_payload['sub'])
+
+      # render json: {jwt_payload: jwt_payload, id: params[:id]}
+
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

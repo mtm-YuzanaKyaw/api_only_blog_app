@@ -48,17 +48,7 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def current_user
-    if request.headers['Authorization'].present?
-      jwt_payload = JWT.decode(request.headers['Authorization'].split.last,
-                              "123456789").first
 
-      current_user = User.find(jwt_payload['sub'])
-
-      # render json: {jwt_payload: jwt_payload, id: params[:id]}
-
-    end
-  end
 
 
   private
